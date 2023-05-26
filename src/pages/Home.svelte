@@ -2,6 +2,16 @@
     import svelteLogo from '../assets/svelte.svg'
     import viteLogo from '/vite.svg'
     import Counter from '../lib/Counter.svelte'
+    import { authMock } from '../lib/authMock';
+    import { navigateTo } from 'svelte-router-spa';
+
+
+    const { logout } = authMock()
+        const onLogout = () => {
+            logout().then(() => {
+                navigateTo("/");
+            })
+        }
 </script>
 
 <section>
@@ -15,7 +25,8 @@
       </div>
       <h1>Vite + Svelte</h1>
     
-      <div class="card">
-        <Counter />
+      <div class="card mt-5">
+        <Counter  />
+        <button class="text-white" on:click={onLogout}> Logout </button>
       </div>
 </section>
